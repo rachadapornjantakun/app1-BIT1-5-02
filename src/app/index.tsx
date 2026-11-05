@@ -1,98 +1,69 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
+//นำเข้า วิว,ข้อความ จาก
+import {View,Text,StyleSheet,Image} from 'react-native';
+//ส่งออก เริ่มต้น ฟังก์ชัน ชื่อฟังก์ชัน
+
+export default function App (){
     return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
-  return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
+        //ใส่สไตล์ตกเเต่ง
+        <View style={myStyle.container}>
+        {/* เเสดงข้อความ */}
+            <Text style={myStyle.title}>Rachadaporn</Text>
+
+            {/* เเสดงภาพจากไฟล์ */}
+            <Image
+             source={require('@/assets/images/images.webp')}
+             style ={{
+                width: 200,//กว้่าง
+                height:200,//สูง
+                borderRadius : 100,//ความโค่้งของมุม
+                borderWidth : 5,//ความกว้างของขบ
+                borderColor: "#ef92f4"//สีของขอบ
+             }}
+            />
+            {/* ใส่ภาพจากลิ้ง */}
+            <Image
+            source={{uri : "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhEgns5lf72PGq6y97CXH7IHD5ncaggDN0czgtCIdEXZbko6NtmZDU7l-CZ-T9dvn_2uEHxrPQ_puY7o-ccJ9_g8PQPd6xrH49_jXB7ExJ_wYnIw2n2ZA6LBjn5YsAm8T0Jx6aqCnPJQG8/s1600/About+Cinderella.jpg"}}
+            style={{
+                width: 200,//กว้่าง
+                height:200,//สูง
+                borderRadius : 100,//ความโค่้งของมุม
+                borderWidth : 5,//ความกว้างของขบ
+                borderColor: "#5ec8ef"//สีของขอบ
+
+            }}
+            /> 
+            {/* จัดเเนวนอน */}
+            <View style={{flexDirection: "row"}}>
+                <Text>🐶</Text>
+                <Text>🦋</Text>
+                <Text>🐰</Text>
+                <Text>🐻</Text>
+                
+
+                
+
+
+            </View>
+        </View>
+    )
 }
+  
+const myStyle = StyleSheet.create({
+    // สไตล์ของกล่อง
+    container:{
+        backgroundColor:"#ffe4e1", //สีพื้นหลัง
+        flex:1, //ขยาย
+        paddingTop: 80, // เพิ่มช่องว่างด้านบนในกล่อง
+        alignItems : "center",
+    },
+    title:{
+        color: "blue", // สีอักษร
+        fontSize: 26, // ขนาดอักษร
+        fontWeight: 500, // ความหนาตัวอักษร
+        textAlign: "center", // จัดเเนวการวาง
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});
+        }
+})
